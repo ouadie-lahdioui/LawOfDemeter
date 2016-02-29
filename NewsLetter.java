@@ -16,7 +16,6 @@ import java.util.List;
  */
 public class NewsLetter
 {
-
 	private static BigDecimal NEWS_LETTER_PRICE = BigDecimal.TEN;
 	private final List<Customer> customers;
 
@@ -25,23 +24,8 @@ public class NewsLetter
 	}
 
 	public BigDecimal calculateFunds() {
-		BigDecimal fundsCollected = BigDecimal.ZERO;
-
-		for (final Customer customer : customers)
-		{
-			final BigDecimal paymenetAmount = customer.makePayment(NEWS_LETTER_PRICE);
-			if (paymenetAmount.compareTo(BigDecimal.ZERO) > 0)
-			{
-				fundsCollected = fundsCollected.add(paymenetAmount);
-			}
-		}
-		System.out.println(fundsCollected);
-		return fundsCollected;
-	}
-
-	/*private BigDecimal calculateFunds() {
 		return customers.stream()
 				.map(c -> c.makePayment(NEWS_LETTER_PRICE))
-				.reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
-	}**/
+				.reduce(BigDecimal.ZERO, BigDecimal::add);
+	}
 }
