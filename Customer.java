@@ -41,27 +41,4 @@ public class Customer
 
 		return BigDecimal.ZERO;
 	}
-
-	/**
-	 * Getter for the wallet.
-	 *
-	 * @return Returns the wallet
-	 */
-	public Wallet getWallet()
-	{
-		return wallet;
-	}
-
-	/**
-	 * Setter for the wallet.
-	 *
-	 * @param wallet
-	 *           The wallet to set
-	 */
-	public void setWallet(final Wallet wallet)
-	{
-		this.wallet = wallet;
-	}
-
-
 }

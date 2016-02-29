@@ -1,5 +1,4 @@
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,39 +16,16 @@ import java.util.List;
  */
 public class NewsLetter
 {
-
 	private static BigDecimal NEWS_LETTER_PRICE = BigDecimal.TEN;
-	private static List<Customer> customers;
+	private final List<Customer> customers;
 
-	static
-	{
-		final Wallet wallet = new Wallet(BigDecimal.TEN);
-
-		/* Initialise customers */
-		customers = new ArrayList<Customer>();
-
-		/* Add custemer */
-		customers.add(new Customer(wallet));
-		customers.add(new Customer(wallet));
+	public NewsLetter(List<Customer> customers) {
+		this.customers = customers;
 	}
 
-	/**
-	 * Buy news letter to all customers
-	 *
-	 * @param args
-	 *           The JAVA args
-	 */
-	public static void main(final String[] args)
-	{
-		final BigDecimal fundsCollected = BigDecimal.ZERO;
-
-		for (final Customer customer : customers)
-		{
-			final BigDecimal paymenetAmount = customer.makePayment(NEWS_LETTER_PRICE);
-			if (paymenetAmount.compareTo(BigDecimal.ZERO) > 0)
-			{
-				fundsCollected.add(paymenetAmount);
-			}
-		}
+	public BigDecimal calculateFunds() {
+		return customers.stream()
+				.map(c -> c.makePayment(NEWS_LETTER_PRICE))
+				.reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 }
